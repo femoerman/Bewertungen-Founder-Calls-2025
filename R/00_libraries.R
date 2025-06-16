@@ -8,6 +8,13 @@ USE_BOOTSTRAP <- TRUE # for bootstrap theme
 USE_READXL <- TRUE # to read xlsx/xls without requiring java
 USE_WRITEXL <- TRUE # to write xlsx without requiring java
 USE_REDCAP_API <- TRUE # to use REDCapR for redcap io
+
+if (!require(tidyverse)) install.packages('tidyverse')
+if (!require(shiny)) install.packages('shiny')
+if (!require(ggpubr)) install.packages('ggpubr')
+if (!require(RColorBrewer)) install.packages('RColorBrewer')
+if (!require(REDCapR)) install.packages('REDCapR')
+if (!require(wesanderson)) install.packages('wesanderson')
  
 # Mandatory core packages ----
 library(tidyverse) # the tidyverse: dplyr, ggplot,...

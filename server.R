@@ -4,7 +4,7 @@
 # * performs all calculations
 # * builds and updates the output objects in a list called output
 
-setwd("~/work/bewertungen-founder-calls-2025")
+setwd("~/work/Bewertungen-Founder-Calls-2025")
 
 server <- function(input, output, session) {
   # THEME RELATED STUFF -----------------------------------------------------
