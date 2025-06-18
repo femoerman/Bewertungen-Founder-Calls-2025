@@ -68,7 +68,7 @@ import_redcap_bewertungen <- function(env.deploy="rstudio"){
   if(env.deploy!="posit"){
     data <- read_from_redcap(redcap_url , redcap_token)
   } else {
-    data <- read_from_redcap(Sys.getenv("redcap_url") , Sys.getenv("redcap_token"))
+    data <- read_from_redcap(Sys.getenv("redcap_url", unset=NA) , Sys.getenv("redcap_api_token", unset=NA))
   }
   
   if(nrow(data)==0){
