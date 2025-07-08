@@ -93,7 +93,10 @@ process_results <- function(df){
   df_out <- df %>% arrange(desc(percentage_score)) %>% mutate(Rang=dense_rank(desc(percentage_score)), percentage_score=round(percentage_score, digits=2)) %>% 
     mutate(`Kumulierter angeforderter Betrag (CHF)`=cumsum(`Beantragte DIZH Gelder (CHF)`))%>% 
     select(Rang, kandidat_in, percentage_score, evaluations, Projekttitel, `Beantragte DIZH Gelder (CHF)`, `Kumulierter angeforderter Betrag (CHF)`) 
-  colnames(df_out) <- c("Rang", "Kandidat:in (Hauptantragsteller:in)", "Gesamtscore (% theoretischer Maximalscore)", "Anzahl erhaltene Bewertungen", "Projekttitel", "Beantragte DIZH Gelder (CHF)", "Kumulierter angeforderter Betrag (CHF)")
+  colnames(df_out) <- c("Rang", "Kandidat:in (Hauptantragsteller:in)", "Gesamtscore (% theoretischer Maximalscore)", "Anzahl erhaltene Bewertungen", "Projekttitel", "Beantragte DIZH Gelder (CHF)", "Kumulierter angeforderter Betrag (CHF)") 
+  df_out <- df_out %>%
+    select(Rang, `Kandidat:in (Hauptantragsteller:in)`, Projekttitel, `Anzahl erhaltene Bewertungen`, `Gesamtscore (% theoretischer Maximalscore)`, `Beantragte DIZH Gelder (CHF)`, `Kumulierter angeforderter Betrag (CHF)`)
+  
   return(df_out)
 }
 
@@ -103,10 +106,9 @@ process_results_by_criterion <- function(df){
                 mean_kooperation, mean_unternehmerisch, evaluations) %>% 
     mutate(impact=round(mean_impact*100/7, digits=2), qualitat=round(mean_qualitat*100/7, digits=2),
            erfindersgeist=round(mean_erfindersgeist*100/7, digits=2), kooperation=round(mean_kooperation*100/7, digits=2), unternehmerisch=round(mean_unternehmerisch*100/7, digits=2)) %>%
-    select(kandidat_in, impact, qualitat, erfindersgeist, kooperation, unternehmerisch, evaluations)
-  colnames(df2) <- c( "Kandidat:in (Hauptantragsteller:in)", "Impact: \n Gesamtscore (% theoretischer Maximalscore)",
+    select(kandidat_in, evaluations, impact, qualitat, erfindersgeist, kooperation, unternehmerisch)
+  colnames(df2) <- c( "Kandidat:in (Hauptantragsteller:in)", "Anzahl erhaltene Bewertungen", "Impact: \n Gesamtscore (% theoretischer Maximalscore)",
                       "Fachliche Qualität: \n Gesamtscore (% theoretischer Maximalscore)", "Erfindergeist und Risikobereitschaft: \n Gesamtscore (% theoretischer Maximalscore)",
-                      "Kooperation und disziplinärer Dialog: \n Gesamtscore (% theoretischer Maximalscore)", "Unternehmerisches Mindset: \n Gesamtscore (% theoretischer Maximalscore)",
-                      "Anzahl erhaltene Bewertungen")
+                      "Kooperation und disziplinärer Dialog: \n Gesamtscore (% theoretischer Maximalscore)", "Unternehmerisches Mindset: \n Gesamtscore (% theoretischer Maximalscore)")
   return(df2)
 }

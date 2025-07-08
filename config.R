@@ -3,7 +3,7 @@
 #' from the R folder are sourced
 
 CONFIG_SUCCESS <- FALSE
-source("secret_keys.R")
+#source("secret_keys.R")
 scripts <- paste0("R/", list.files("R/", recursive = FALSE))
 source("install.R")
 lapply(scripts, source)

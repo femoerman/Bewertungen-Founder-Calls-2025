@@ -43,14 +43,16 @@ create_barplot <- function(df){
   if(nrow(df)==0){
     plot_out <- ggplot() + theme_void()
   } else {
-    plot_out <- ggplot(df, aes(x=reorder(`Kandidat:in (Hauptantragsteller:in)`, Rang), y=`Gesamtscore (% theoretischer Maximalscore)`), colour="grey", fill="grey") + 
-      geom_bar(stat="identity") + xlab("Kandidat:in (Hauptantragsteller:in)") +
+    plot_out <- ggplot(df, aes(x=reorder(`Kandidat:in (Hauptantragsteller:in)`, Rang), y=`Gesamtscore (% theoretischer Maximalscore)`), colour="grey80", fill="grey90") + 
+      geom_bar(stat="identity", colour="grey", fill="grey80") + xlab("Kandidat:in (Hauptantragsteller:in)")+
+      geom_text(aes(label = `Kandidat:in (Hauptantragsteller:in)`), vjust = 0, hjust=1.5, size=7, colour = "black", angle=90) +
       geom_line(inherit.aes = F, data=df, mapping = aes(x=reorder(`Kandidat:in (Hauptantragsteller:in)`, Rang), y=`Gesamtscore (% theoretischer Maximalscore)`, group=1), size=3, colour="Black") + 
       theme_bw() + 
       theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
             panel.background = element_blank(), axis.line = element_line(colour = "black"),
-            axis.text.x = element_text(size=12, angle = 45, hjust = 1), axis.title = element_text(size=15),
-            axis.text.y = element_text(size=12), legend.position = "none") 
+            axis.text.x = element_blank(),
+            axis.text.y = element_text(size=18), legend.position = "none",
+            axis.title = element_text(size=18)) 
   } 
   
   return(plot_out)
@@ -65,15 +67,17 @@ create_barplot_criteria <- function(df){
     df_plot <- gather(df, key="Criterion", value = "Gesamtscore (% theoretischer Maximalscore)", `Impact: \n Gesamtscore (% theoretischer Maximalscore)`,
                       `Fachliche Qualität: \n Gesamtscore (% theoretischer Maximalscore)`, `Erfindergeist und Risikobereitschaft: \n Gesamtscore (% theoretischer Maximalscore)`,
                       `Kooperation und disziplinärer Dialog: \n Gesamtscore (% theoretischer Maximalscore)`, `Unternehmerisches Mindset: \n Gesamtscore (% theoretischer Maximalscore)`)
-    plot_out <- ggplot(df_plot, aes(x=`Kandidat:in (Hauptantragsteller:in)`, y=`Gesamtscore (% theoretischer Maximalscore)`), colour="grey", fill="grey") +
-      facet_wrap(~Criterion, ncol=2, ) + 
-      geom_bar(stat="identity", position=position_dodge()) + 
+    plot_out <- ggplot(df_plot, aes(x=`Kandidat:in (Hauptantragsteller:in)`, y=`Gesamtscore (% theoretischer Maximalscore)`), colour="grey80", fill="grey90") +
+      facet_wrap(~Criterion, ncol=3) + 
+      geom_bar(stat="identity", position=position_dodge(), colour="grey", fill="grey80") + 
+      geom_text(aes(label = `Kandidat:in (Hauptantragsteller:in)`), vjust = 0, hjust=0.75, size=4, colour = "black", angle=90) +
       guides(fill=guide_legend(ncol=2), colour=guide_legend(ncol=2)) + 
       theme_bw() + 
       theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
             panel.background = element_blank(), axis.line = element_line(colour = "black"),
-            axis.text.x = element_text(size=12, angle = 45, hjust = 1), axis.title = element_text(size=15),
-            axis.text.y = element_text(size=12), strip.text = element_text(size=10), legend.position = "bottom") 
+            axis.text.x = element_blank(),
+            axis.text.y = element_text(size=18), strip.text = element_text(size=10), legend.position = "bottom",
+            axis.title = element_text(size=18)) 
   } 
   return(plot_out)
 }
