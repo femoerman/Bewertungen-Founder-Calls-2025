@@ -5,7 +5,7 @@
 # * builds and updates the output objects in a list called output
 
 setwd("~/work/Bewertungen-Founder-Calls-2025")
-source("config.R")
+#source("config.R")
 
 server <- function(input, output, session) {
   # THEME RELATED STUFF -----------------------------------------------------
