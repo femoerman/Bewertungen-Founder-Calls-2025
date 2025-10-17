@@ -84,7 +84,10 @@ process_data_bewertungen <- function(df){
  df_by_kan[is.na(df_by_kan)] <- NA
  df_by_kan[df_by_kan==0] <- NA
  
- df_by_kan <- left_join(df_by_kan, amounts, by="kandidat_in") %>% mutate(kandidat_in = paste0("ID ", ID, ": ", kandidat_in)) %>% select(-ID)
+ # Mutate the amounts, so that the project name is added to the canidate name
+ amounts2 = amounts %>% mutate(kandidat_in = paste0(kandidat_in, " (", Projekttitel, ")"))
+ 
+ df_by_kan <- left_join(df_by_kan, amounts2, by="kandidat_in") %>% mutate(kandidat_in = paste0("ID ", ID, ": ", kandidat_in)) %>% select(-ID)
  return(df_by_kan)
 }
 
